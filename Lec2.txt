@@ -1,0 +1,67 @@
+Описание функции - Получить список стран
+Метод запроса - GET
+Пример запроса:
+GET /restapi/country HTTP 1.1
+Host: my.site.com
+User-Agent: Internet-Explorer 9.0
+
+
+
+Описание функции - Получить список отелей в стране
+Метод запроса - GET
+Пример запроса:
+GET /restapi/country/<name>/hotel HTTP 1.1
+Host: my.site.com
+User-Agent: Internet-Explorer 9.0
+
+
+
+Описание функции - Добавить страну
+Метод запроса - POST
+Пример запроса:
+POST /restapi/country HTTP 1.1
+Host: my.site.com
+User-Agent: Internet-Explorer 9.0
+
+name='Ukraine', description='good country'
+
+
+
+Описание функции - Добавить отель в страну
+Метод запроса - POST
+Пример запроса:
+POST /restapi/country/<name>/hotel HTTP 1.1
+Host: my.site.com
+User-Agent: Internet-Explorer 9.0
+
+name='best',  description='good hotel'
+
+
+
+Описание функции - Удалить определенный отель
+Метод запроса - DELETE
+Пример запроса:
+DELETE /restapi/country/<name>/hotel/<ID> HTTP 1.1
+Host: my.site.com
+User-Agent: Internet-Explorer 9.0
+
+
+
+Описание функции - Получить информацию об определенном отеле
+Метод запроса - GET
+Пример запроса:
+GET /restapi/country/<name>/hotel/<ID> HTTP 1.1
+Host: my.site.com
+User-Agent: Internet-Explorer 9.0
+
+
+
+Описание функции - Обновить информацию об определенном отеле
+Метод запроса - PUT
+Пример запроса:
+PUT //restapi/country/<name>/hotel/<ID> HTTP 1.1
+Host: my.site.com
+User-Agent: Internet-Explorer 9.0
+
+description='The best country'
+
