@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Goods</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
+		<style>
+			body {
+				background : #F2E21B;
+			}
+			table {
+				width: 250px;
+				border-collapse: collapse;
+				background: #b0e7e6;
+			}
+			tr, .some_goods, #new_goods {
+				border: 1px black solid;
+			}
+			.del_goods {
+				visibility: hidden;
+				font-size: 28px;
+				background: #b0e7e6
+			}
+			.some_goods, #new_goods, .name_goods {
+				font-size: 26px;
+			}
+		</style>
+
+		<script>
+			$( document ).ready(function() {
+				// Добавление строки с товаром
+				$("#new_goods").keypress(function(e) {
+					var add_new = $("#new_goods").val();
+					if((e.which == 13) && (/([A-Za-z0-9-]+)/.test($("#new_goods").val()))) {  
+						$("tbody").append("<tr> <td align=\"center\"> <input type=\"checkbox\" class=\"goods_check\"> </td><td> <div class = \"name_goods\"> " + add_new + " </div> </td> <td align=\"right\"> <button  class=\"del_goods\">&times;</button> </td>	</tr>");
+						$("#new_goods").val("");	
+					}
+				});
+				// Удаление всей строчки при нажати на крестик
+				$('tbody').on('click', 'tr td button', function(){
+					$(this).parent().parent().remove();
+				});
+				// наведение и уход с поля div и изменение свойства крестика
+				$('tbody').on('mouseover', 'tr', function(){
+					var button = $(this).find('button');
+					button.css( {"visibility" : "visible"} );
+				});
+				$('tbody').on('mouseout', 'tr', function(){
+					var button = $(this).find('button');
+					button.css( {"visibility" : "hidden"} );
+				});
+				// Редактирование существующего товара
+				$("tbody").on('dblclick', 'tr td:nth-child(2)', function() {
+					if ($(this).find('input').length) {
+						return;
+					}
+					var value_goods = $(this).find('div').text();
+					$(this).find('div').remove();
+					$(this).append("<input class=\"some_goods\" value='" + value_goods + "'/>");				
+					$(this).find('input').keypress(function(e) {
+						if(e.keyCode == 13) {
+							var change_goods = $(this).val();
+							var td = $(this).parent();
+							$(this).remove();
+							td.append("<div class=\"name_goods\">" + change_goods + "</div>");
+						}
+						else if(e.keyCode == 27) {
+							var td = $(this).parent();
+							$(this).remove();
+							td.append("<div class=\"name_goods\">" + value_goods + "</div>");
+						}
+					});
+				});
+				//Изменение стиля при активации checkbox
+				$('tbody').on('click', 'tr td input', function() {
+					var td = $(this).parent();
+					var div = td.next().find('div');					
+					if ($(this).is(":checked")) {			
+						div.attr("style", "text-decoration:line-through; opacity:0.5;");
+					} 
+					else{
+						div.attr("style", "text-decoration:none;");
+					};
+				});						
+				//выбор всего списка
+				$("#all").change(function() {
+					if($(this).is(":checked")) {
+						$(".name_goods").attr("style", "text-decoration:line-through; opacity:0.5;");
+						$(".goods_check").prop("checked", true);
+					}
+					else {
+			  			$(".name_goods").attr("style", "text-decoration:none;");
+			  			$(".goods_check").prop("checked", false);
+					}
+				});
+				//удаление выбранного
+				$("#del_all").click(function() {
+					$(".goods_check:checked").parent().parent().remove();
+					$("#all").prop("checked", false);
+				});			
+			});
+		</script>
+	</head> 
+
+	<body>
+		<div>	
+			<table>
+				<thead>
+				  <tr>
+				    <th> <input type="checkbox" id="all">all</input> </th>
+				    <th> <input type="text" id="new_goods" value=""> </th>
+				    <th> <button type="buton" id="del_all">Удалить выбранное</button> </th>
+				  </tr>				
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</body>
+
+</html>
