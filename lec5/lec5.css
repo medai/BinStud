@@ -1,0 +1,136 @@
+body {
+  margin: 0px;
+}
+#container {
+  background: #cfe2f3;
+  font-family: Verdana;
+  font-size: 18px;
+}
+
+
+#img {
+    float: left;
+    background: #A4C2F4;
+    border: 1px #000000 solid;
+}
+#header_text{
+  text-indent: 20px;
+  line-height: 102px;
+  border: 1px #000000 solid;
+  overflow: auto;
+}
+#clear {
+  clear:both;
+}
+
+
+#menu {
+  float: left;
+  width: 250px;
+  height: 482px;
+  border: 1px #000000 solid;
+}
+ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.menu {
+  text-align: left;
+  border: 1px #6AA84F solid;
+  height: 24px;
+  padding: 2px;
+  background: #B6D7A8;
+}
+
+
+#content {
+  margin-left: 252px;
+}
+#top {
+  border: 1px #000000 solid;
+  text-align:center;
+  height: 310px;
+  overflow: auto;
+}
+.div_top {
+  border: 2px #000000 solid;
+  display: inline-block;
+  margin: 1.2%;
+  width: 270px;
+  line-height: 115px;
+  background: #EAD1DC;
+  font-size: 0;
+}
+#bottom {
+  border: 1px #000000 solid;
+  text-align:center;
+  height: 170px;
+  overflow: auto;
+}
+.div_bot {
+  border: 2px #000000 solid;
+  display: inline-block;
+  margin: 1.2%;
+  width: 27%;
+  line-height: 135px;
+  background: #EAD1DC;
+  font-size: 0;
+  text-align:left;
+}
+.text {
+  display: inline-block;
+  font-size: medium;
+  line-height: normal;
+  vertical-align: middle;
+}
+
+
+#box {
+  position: relative;
+}
+#strip {
+   position: absolute;
+   right: 0; top: 0;
+   z-index: 1;
+   overflow: hidden;
+   width: 75px; height: 75px; 
+}
+span {
+   transform: rotate(45deg);
+   width: 100px;
+   display: block;
+   position: absolute;
+   top: -5px; right: -10px;
+}
+span::before {
+   content: '';
+   position: absolute; 
+   left: 30px; top: 16px;
+   width: 100%;
+   z-index: 1;
+   border: 2px solid black;
+}
+span::after {
+   content: '';
+   position: absolute; 
+   width: 100%;
+   z-index: 1;
+   border: 2px solid black; 
+}
+
+
+.footer1 {
+  background: #FFE599;
+  height: 70px;
+  border: 1px #000000 solid;  
+  text-align:center;
+  overflow: auto;
+}
+#footer2 {
+  border: 1px #000000 solid;
+  height: 40px;
+  width: 100%;
+  line-height: 40px;
+  text-align:center;
+}
