@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html ng-app="app">
+
+	<head>
+		<meta charset="utf-8">
+		<title>lec8</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.js"></script>
+		<script src="lec8controllers.js"></script>	
+
+		<style>
+			body {
+				background : #F2E21B;
+			}
+			table {
+				border-collapse: collapse;
+				background: #b0e7e6;
+			}
+			.products_list, .people_list {
+			    width: 50%;
+			    text-align: center;
+			    float: left;
+			}
+			.list1 {
+				width: 300px;				
+			}
+			.list2 {
+				width: 500px;				
+			}
+		</style>
+	</head> 
+
+
+	<body ng-cloak>
+
+		<div class="products_list" ng-controller="productsController">	  			
+
+			<table border = "1"  class="list1" ng-show="showProductsList">
+				<caption><b>Товары</b></caption>
+
+				<thead>
+				  <tr>
+				    <th>Наименование товара</th>
+				    <th>Цена товара</th>
+				  </tr>				
+				</thead>
+
+				<tfoot>
+					<tr>
+						<td colspan="2">Количество товаров: {{ products.length }}</td>
+					</tr>
+				</tfoot>
+
+				<tbody>
+				  <tr ng-repeat="product in products | filter: search" >
+				    <td> {{ product.title }} </td>
+				    <td> {{ product.price }} </td>
+				  </tr>	
+				</tbody>
+			</table>
+
+		  <div class="list1"><b>Поиск:</b>
+				<input type="text" size = "19" border="1" ng-model="search">
+			</div>
+			<br>
+
+			<div class="list1" align="center">
+        <button ng-click="addProduct()">Добавить товар</button>
+        <button ng-click="toggleViewProducts()">Скрыть товары</button>
+      </div>
+
+		</div>
+
+
+		<div class="people_list" ng-controller="peopleController">	  
+				
+			<table border = "1" class="list2" ng-show="showPeoplelist">
+				<caption><b>Покупатели</b></caption>
+
+				<thead>
+				  <tr>
+				    <th>Аватарка</th>
+				    <th>Имя</th>
+				    <th>Город</th>
+				    <th>Возраст</th>
+				    <th>Удалить</th>
+				  </tr>				
+				</thead>
+
+				<tfoot>
+					<tr>
+						<td colspan="5">Количество покупателей: {{ people.length }}</td>
+					</tr>
+				</tfoot>
+
+				<tbody>
+				  <tr ng-repeat="people in people | filter:search" >
+				    <td> <img ng-src="lec8avatars/{{ people.avatar }}"/> </td>
+				    <td> Покупатель: {{ people.name | uppercase }} </td>
+				    <td> {{ people.city }} </td>
+				    <td> {{ people.age }} </td>
+				    <td>
+				    	<button ng-click="removePeople($index)"> Удалить </button>
+				    </td>
+				  </tr>	
+				</tbody>
+			</table>
+
+		  <div class="list2"><b>Поиск:</b>
+				<input type="text" size = "41" border="1" ng-model="search.name">
+			</div>
+			<br>
+
+			<div class="list2" align="center">
+        <button ng-click="addPeople()">Добавить покупателя</button>
+        <button ng-click="toggleViewPeople()">Скрыть покупателей</button>
+      </div>
+
+		</div>
+
+	</body>
+
+</html>
