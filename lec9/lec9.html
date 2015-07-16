@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>lec9</title>
+	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.js"></script>
+	<script src="scripts/lec9_module.js"></script>
+	<script src='scripts/lec9_controller.js'></script>
+	<script src='scripts/lec9_directive.js'></script>
+	<!--     <script src='scripts/lec9_factory.js'></script> -->
+	<script src='scripts/lec9_service.js'></script>
+
+	<style>
+		body {
+			background : #F2E21B;
+			margin: 0px;
+			padding: 0px;
+		}
+		#photos_div {
+			background : #EDBADB;
+			border-radius: 10px;
+			text-align: center;
+			margin: 10px auto 10px;
+			width: 30%;
+			padding: 10px
+		}
+		.back{
+			position: fixed;
+			top: 0;
+			width: 100%;
+			height: 100% ;
+			background : #D8D3DB;
+		}
+		.fullFoto {
+			position: absolute;
+			border-radius: 20px;
+			top:50%;
+			left:50%;
+			margin-top: -300px;
+			margin-left: -300px;
+		}
+	</style>  
+</head>
+
+<body ng-cloak>
+	<div ng-controller="listController as ctrl">
+		<h1 align="center">Photos List</h1>
+		<div id='photos_div' ng-repeat="photo in ctrl.photos">
+			<div lec9-directive></div>
+			<div>{{photo.title}}</div>
+		</div>
+	</div>
+</body>
+
+</html>
