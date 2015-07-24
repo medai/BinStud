@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JS client</title>
+    </head>
+
+    <body>
+        <div>
+            <input type="text" placeholder="Your name" id="nameInput">
+            <input type="button" value="OK" id="nameButton">
+        </div>
+        <ul id="messages"></ul>
+        <div>
+            <textarea id="text" cols="30" rows="10"></textarea>
+            <input type="button" value="Send" id="textSubmit">
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        (function(){
+            var nameButton = document.getElementById('nameButton');
+            var nameInput  = document.getElementById('nameInput');
+            var messages   = document.getElementById('messages');
+            var text       = document.getElementById('text');
+            var textSubmit = document.getElementById('textSubmit');
+            var userName = 'Unknown user';
+
+            nameButton.onclick = function(){
+                userName = nameInput.value || 'Unknown user';
+            };
+
+            textSubmit.onclick = function(){
+                var data = {
+                            name: userName,
+                            text: text.value
+                };
+                text.value = '';
+                ajaxRequest({
+                            method: 'POST',
+                            url: '/messages',
+                            data: data
+                });
+            };
+
+            var ajaxRequest = function(options){
+                var url      = options.url || '/';
+                var method   = options.method || 'GET';
+                var callback = options.callback || function(){};
+                var data     = options.data || {};
+                var xmlHttp  = new XMLHttpRequest();
+                
+                xmlHttp.open(method, url, true);
+                xmlHttp.setRequestHeader('Content-type', 'application/json');
+                xmlHttp.send(JSON.stringify(data));
+
+                xmlHttp.onreadystatechange = function(){
+                    if (xmlHttp.status == 200 && xmlHttp.readyState === 4){
+                        callback(xmlHttp.responseText);
+                    }
+                };
+            };
+
+            var getData = function(){
+                ajaxRequest({
+                    url: '/messages',
+                    method: 'GET',
+
+                    callback: function(msg){
+                        var msg = JSON.parse(msg);
+                        messages.innerHTML = '';
+                        
+                        for (var i in msg){
+                            if(msg.hasOwnProperty(i)){
+                                var el = document.createElement('li');
+                                el.innerHTML = msg[i].name + ': ' + msg[i].text;
+                                messages.appendChild(el);
+                            };
+                        };
+                    }
+                });
+            };
+
+            getData();
+
+            setInterval(function(){
+                getData();
+            }, 1000);
+
+        })();
+    </script>
+
+</html>
