@@ -1,0 +1,117 @@
+https://github.com/medai/lec14
+
+
+создали новый репозиторий lec14 на гитхабе
+echo "# lec14" >> README.md
+git init
+git add README.md
+git commit -m "01 : create file"
+git push -u origin master
+
+
+
+
+echo "# commit2" >> README.md       создал файл
+git add README.md                   добавил файл в репозиторий
+git commit -m "01 : change file"    закомитил
+git push
+ 
+git branch develop                  создал ветку
+git checkout develop                переключился на новыю ветку
+echo "# " >> README-DEV.md
+git add README-DEV.md
+git commit -m "01 : create file"
+echo "# comit5" >> README-DEV.md
+git add README-DEV.md
+git commit -m "02 : change file"
+git push --all 			    публикую все на уделенном репозитории
+ 
+git checkout master
+echo "# commit3" >> README.md
+git add README.md
+git commit -m "02 : change file"
+git push --all         
+git checkout develop         
+
+DZ 1.2 (команда выводит для каждого коммита из веток master, develop, в сообщении которых есть
+упоминание заданного номера задачи (допустим задачи 02), его сообщение, автора и
+дату. Сортировка по дате, первые более новые.)
+git log master develop --grep=02 --pretty=format:"%s [%an] %ar" --date-order
+выбрираем из 2-х веток, должны содержать задачи 02, видим сообщение, автора и дату, сортиркем по дате
+
+
+
+
+git branch develop-feature1
+git checkout develop-feature1
+echo "# " >> README-DEV-F1.md
+git add README-DEV-F1.md
+git commit -m "01 : create file"
+
+echo "# from develop-feature1" >> README-DEV.md
+git add README-DEV.md
+git commit -m "04 : change file"
+git push --all
+ 
+DZ 1.1 (команда выводит сообщения и автора всех коммитов из ветки developfeature1,
+которые сделаны за последние 3 часа и которых нет в родительских ветках (develop, master).
+Сортировка по дате, первые более новые.)
+git log develop-feature1 --not develop --pretty=format:"%s%d [%an] %ar" --since=3.hours --graph --no-merges --date-order
+
+
+git checkout develop
+git merge develop-feature1 (git merge --no-ff develop-feature1     так было бы лучше)
+git push --all
+
+
+git checkout develop-feature1
+echo "# from develop-feature1 best code" >> README-DEV.md
+git add README-DEV.md
+git commit -m "05 : change file best code"
+git push --all
+
+echo "# from develop-feature1 bed code 1" >> README-DEV.md
+git add README-DEV.md
+git commit -m "05 : change file bed code"
+echo "# from develop-feature1 bed code 2" >> README-DEV.md
+git add README-DEV.md
+git commit -m "05 : change file bed code"
+git push --all
+
+DZ 2 (как добавить в develop только ваш коммит, но чтобы 3 коммита после него в develop не
+попали?)
+git log develop-feature1 -4
+git show bb0ca4a
+git checkout develop
+git cherry-pick bb0ca4a
+
+
+DZ 3 (Предложите вариант, как наиболее просто
+исправить ситуацию, чтобы тим лид не увидел ваш промах)
+git branch develop-feature3
+git checkout develop-feature3
+echo "# from develop-feature3_1" >> README-DEV.md
+git add README-DEV.md
+git commit -m "04 : change file from feature3"
+echo "# from develop-feature3_1" >> README-DEV.md
+echo "# from develop-feature3_2" >> README-DEV.md
+git add README-DEV.md
+git commit -m " change file from feature3"
+echo "# from develop-feature3_3" >> README-DEV.md
+git add README-DEV.md
+git commit -m " change file from feature3_3"
+git push --all
+ 
+git rebase --interactive HEAD~2 
+echo "# from develop-feature3_2" >> README-DEV.md
+git add README-DEV.md
+git commit -m " change file from feature3"
+echo "# from develop-feature3_3" >> README-DEV.md
+git add README-DEV.md
+git commit -m " change file from feature3_3"
+ 
+ 
+ 
+ 
+
+
